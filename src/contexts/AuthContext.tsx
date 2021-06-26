@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { auth } from '../services/firebase';
-import { useAuth } from '../hooks/useAuth'
 
 
 type User = {
