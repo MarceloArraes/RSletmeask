@@ -10,7 +10,7 @@ import { FormEvent } from 'react'
 import { useState } from 'react'
 import { database } from '../services/firebase'
 import { useTheme } from '../hooks/useTheme'
-
+import '../styles/themes.scss'
 
 export function Home() {
   const history = useHistory();
@@ -45,6 +45,11 @@ export function Home() {
       return;
     }
 
+    if (roomRef.val().endedAt) {
+      alert(`Room already closed at ${roomRef.val().endedAt}`)
+      return;
+    }
+
     history.push(`/rooms/${roomCode}`);
 
 
@@ -53,6 +58,7 @@ export function Home() {
   return (
     <div id="page-auth" className={currentTheme}>
       <aside>
+        <button onClick={handleThemes} className="themes-button">Change Themes</button>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
         <p>Tire as duvidas de sua audiência em tempo-real</p>
@@ -60,7 +66,7 @@ export function Home() {
       <main >
         <div className="main-content">
           <img src={logoImg} alt="Letmeask" />
-          <button onClick={handleThemes}>Change Themes</button>
+
           <button onClick={handleCreateRoom} className="create-room">
             <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
